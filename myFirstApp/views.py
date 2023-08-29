@@ -2,7 +2,10 @@
 
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
-from .models import Users
+from .models import Users,Task
+from django.shortcuts import get_object_or_404,get_list_or_404 #Estas funciones nos permiten traer el error 404 en caso de no encontrar listas o objetos y asi evitar que se caiga el servidor
+
+
 # Create your views here.
 #Las views nos permitiran crear las vistas que queremos mostrar al cliente, generando una respuesta Http#
 #Ejemplo a continuación 
@@ -36,6 +39,14 @@ def users(request):
     usuarios = list(Users.objects.values())
     return JsonResponse(usuarios,safe=False)
 
-def tasks(request):
-    return HttpResponse("Tareas")
+#Encontrar tarea por id
+def tasks(request,task_id):
+    #tareaEspecifica = Task.objects.get(id=task_id) asi se haria sin gestion de errores
+    tareaEspecifica = get_object_or_404(Task, id=task_id) #Asi se hace gestionando el error y redirigiendo a un 404 en caso de no encontrar el objeto
+    return HttpResponse("Tarea: %s" %tareaEspecifica.title)
+
+#Encontrar tarea por nombre
+def findTaskbyName(request, task_name):
+    tareaEspecificaByName = get_object_or_404(Task,title=task_name)
+    return HttpResponse("La tarea por nombre es: %s" %tareaEspecificaByName.title)
 

@@ -10,5 +10,6 @@ urlpatterns = [
     path('welcome/<str:username>',views.welcomeMessage),#Podemos recibir datos de la url y usarlos como parametros o params, esto colocando una variable entre <tipoDato:variable>, esta variable podra ser extraida por la función views.welcomeMessage para ser utilizada.
     path('number/<int:number>',views.numbers),
     path('users/',views.users),
-    path('tasks/',views.tasks)
+    path('tasks/<int:task_id>',views.tasks),
+    path('tasksByName/<str:task_name>',views.findTaskbyName)
 ] 
