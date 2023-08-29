@@ -1,0 +1,1 @@
+Este directorio contiene archivos de migración generados automáticamente por Django cada vez que modificas tus modelos. Las migraciones te permiten mantener actualizada la estructura de la base de datos a medida que evoluciona tu aplicación.
