@@ -8,9 +8,15 @@ class Users(models.Model):
     username = models.CharField(max_length=50,null=True)
     name = models.CharField(max_length=200)
     
+    def __str__(self): #con este metodo podremos retornar el username en formato string para que el panel pueda leer el username y verlo graficamente
+        return self.username
+    
     
 class Task(models.Model):
     title = models.CharField(max_length=30)
     description = models.TextField(max_length=200)
     user = models.ForeignKey(Users,on_delete=models.CASCADE,null=True)
-     #El valor models.CASCADE de on_delete indica que cuando el objeto relacionado (referenciado) se elimine, se eliminarán automáticamente también los objetos que dependen de él. 
+     #El valor models.CASCADE de on_delete indica que cuando el objeto relacionado (referenciado) se elimine, se eliminarán automáticamente también los objetos que dependen de él.
+    
+    def __str__(self):
+        return self.title + "//" + self.description

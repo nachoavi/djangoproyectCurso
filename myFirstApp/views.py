@@ -3,18 +3,19 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from .models import Users,Task
-from django.shortcuts import get_object_or_404,get_list_or_404 #Estas funciones nos permiten traer el error 404 en caso de no encontrar listas o objetos y asi evitar que se caiga el servidor
+from django.shortcuts import get_object_or_404,get_list_or_404,render #Estas funciones nos permiten traer el error 404 en caso de no encontrar listas o objetos y asi evitar que se caiga el servidor
+#Si importamos render podremos mostrar archivos html como templates en nuetras views
 
 
 # Create your views here.
 #Las views nos permitiran crear las vistas que queremos mostrar al cliente, generando una respuesta Http#
-#Ejemplo a continuación 
+#Ejemplo a continuación  
 
 #Mensaje de bienvenida para el home de la pagina
 def welcomeMessage(request,username): #el segundo parametro "username" corresponde a la variable especificada en la url
     print(username)
     return HttpResponse("""<h1>Hello %s!</h1>
-                        <table>
+                        <table> 
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -25,10 +26,12 @@ def welcomeMessage(request,username): #el segundo parametro "username" correspon
                         </table>""" %username) #con el template %s podemos concatenar la variable username al texto
     
 def mainPage(request):
-    return HttpResponse("Main Page")
+    return render(request,"index.html")
 
 def aboutMessage(request): #Contenido una vez se diriga a la pagina about
-    return HttpResponse("This is about me")
+    title = "Estamos aprendiendo Django"
+    username = "Naxo"
+    return render(request,"about.html",{'titulo':title,'username':username})
 
 
 def numbers(request,number):
@@ -36,8 +39,12 @@ def numbers(request,number):
 
 
 def users(request):
-    usuarios = list(Users.objects.values())
-    return JsonResponse(usuarios,safe=False)
+    #usuarios = list(Users.objects.values())
+    usuarios = Users.objects.all()
+    #return JsonResponse(usuarios,safe=False)
+    return render(request,"usersTable.html",{
+        'usuarios':usuarios
+    })
 
 #Encontrar tarea por id
 def tasks(request,task_id):
