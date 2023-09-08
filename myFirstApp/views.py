@@ -51,6 +51,13 @@ def tasks(request,task_id):
     #tareaEspecifica = Task.objects.get(id=task_id) asi se haria sin gestion de errores
     tareaEspecifica = get_object_or_404(Task, id=task_id) #Asi se hace gestionando el error y redirigiendo a un 404 en caso de no encontrar el objeto
     return HttpResponse("Tarea: %s" %tareaEspecifica.title)
+    
+    
+def taskTable(request):
+    tasks = Task.objects.all()
+    return render(request,"task.html", {
+        "tasks":tasks
+    })
 
 #Encontrar tarea por nombre
 def findTaskbyName(request, task_name):

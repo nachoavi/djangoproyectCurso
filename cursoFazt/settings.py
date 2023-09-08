@@ -125,7 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 #Estas opciones definen la URL base y la ruta en el sistema de archivos donde se almacenan los archivos estáticos (como hojas de estilo CSS, imágenes y archivos JavaScript) para tu proyecto.
-STATIC_URL = 'static/'
+STATIC_URL = BASE_DIR,'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

@@ -11,5 +11,6 @@ urlpatterns = [
     path('number/<int:number>',views.numbers),
     path('users/',views.users),
     path('tasks/<int:task_id>',views.tasks),
-    path('tasksByName/<str:task_name>',views.findTaskbyName) 
-]  
+    path('tasksByName/<str:task_name>',views.findTaskbyName),
+    path('tasksTable/',views.taskTable) 
+]   
